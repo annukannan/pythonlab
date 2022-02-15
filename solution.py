@@ -5,7 +5,7 @@ import sys
 
 
 def webServer(port=13331):
-  serverSocket = socket.socket(AF_INET, SOCK_STREAM)
+  serverSocket = socket(AF_INET, SOCK_STREAM)
   #Prepare a server socket
   serverSocket.bind(('127.0.0.1', port))
   #Fill in start
