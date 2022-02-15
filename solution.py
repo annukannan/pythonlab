@@ -5,21 +5,23 @@ import sys
 
 
 def webServer(port=13331):
-  serverSocket = socket(AF_INET, SOCK_STREAM)
+  #serverSocket = socket(AF_INET, SOCK_STREAM)
+  server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  server.bind(('127.0.0.1', port))
   #Prepare a server socket
-  serverSocket.bind(('127.0.0.1', port))
+  #serverSocket.bind(('127.0.0.1', port))
   #Fill in start
-  serversocket.listen()
+  server.listen()
   #Fill in end
 
   while True:
     #Establish the connection
     #print('Ready to serve...')
-    connectionSocket, addr = serversocket.accept()
+    connectionSocket, addr = server.accept()
     try:
 
       try:
-        message = "helloworld.html"
+        message = "GET helloworld.html HTTP/1.1"
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = f.readlines()
@@ -50,7 +52,7 @@ def webServer(port=13331):
     except (ConnectionResetError, BrokenPipeError):
       pass
 
-  serverSocket.close()
+  server.close()
   sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
