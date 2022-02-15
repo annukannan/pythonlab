@@ -9,7 +9,7 @@ def webServer(port=13331):
   #Prepare a server socket
   serverSocket.bind(('127.0.0.1', port))
   #Fill in start
-  serversocket.listen(5)
+  serversocket.listen()
   #Fill in end
 
   while True:
@@ -23,7 +23,7 @@ def webServer(port=13331):
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = f.readlines()
-        print(outputdata)
+        #print(outputdata)
         #Send one HTTP header line into socket.
         #Fill in start
         connectionSocket.send("Content-Type: text/html\n\n")
