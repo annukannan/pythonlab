@@ -2,6 +2,7 @@ from socket import *
 
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
+#def smtp_client(port=25, mailserver='smtp.gmx.com'):
     msg = "\r\n My message"
     endmsg = "\r\n.\r\n"
 
@@ -10,7 +11,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
-    clientSocket = socket(socket.AF_INET, socket.SOCK_STREAM)
+    clientSocket = socket()
+    #print(clientSocket)
     clientSocket.connect((mailserver, port))
     # Fill in end
 
@@ -29,21 +31,21 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send MAIL FROM command and handle server response.
     # Fill in start
-    clientSocket.send('MAIL FROM: ak9485@nyu.edu\r\n'.encode())
+    clientSocket.send("MAIL FROM: ak9485@nyu.edu\r\n".encode())
     message = clientSocket.recv(1024).decode()
-    # print(message)
+    #print(message)
     # Fill in end
 
     # Send RCPT TO command and handle server response.
     # Fill in start
-    clientSocket.send('RCPT TO: ak9485@nyu.edu\r\n'.encode())
+    clientSocket.send("RCPT TO: ak9485@nyu.edu\r\n".encode())
     message = clientSocket.recv(1024).decode()
     #print(message)
     # Fill in end
 
     # Send DATA command and handle server response.
     # Fill in start
-    clientSocket.send('DATA\r\n'.encode())
+    clientSocket.send("DATA\r\n".encode())
     message = clientSocket.recv(1024).decode()
     #print(message)
     # Fill in end
@@ -51,7 +53,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Send message data.
     # Fill in start
     clientSocket.send(msg.encode())
-    #message = clientSocket.recv(1024).decode()
+    message = clientSocket.recv(1024).decode()
     #print(message)
     # Fill in end
 
@@ -59,12 +61,12 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Fill in start
     clientSocket.send(endmsg.encode())
     message = clientSocket.recv(1024).decode()
-    # print(message)
+    #print(message)
     # Fill in end
 
     # Send QUIT command and handle server response.
     # Fill in start
-    clientSocket.send('QUIT\r\n'.encode())
+    clientSocket.send("QUIT\r\n".encode())
     message = clientSocket.recv(1024).decode()
     #print(message)
     clientSocket.close()
